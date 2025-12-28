@@ -1,0 +1,118 @@
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+   Get your credential values and try the first Trello API.
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+ API : HTTP method -> GET | https://api.trello.com/1/members/me?boards=open&key=f0f5bc17aadd094d4e6f3ad17a3520df&token=e4a44cc95a5f023bd6de5feaf290fb542ceb9585e9584c555b83c3eeabcbb3df
+                        ->  {{URI}}/members/me?boards=open&key={{Key}}&token={{Token}}
+						
+						
+ Description : You need to make sure that this subobject is shown inside the response (which contains boards)
+ 
+ Response Body :
+ 
+    "boards": [
+        {
+            "id": "630dd58e5b157503cec26c51",
+            "name": "NewBoardName",
+            "closed": false,
+            "idOrganization": "630b80492a221e00e16d42a6",
+            "pinned": false
+        },
+        {
+            "id": "630dd810d338ab02ffdec51d",
+            "name": "NewBoardName",
+            "closed": false,
+            "idOrganization": "630b80492a221e00e16d42a6",
+            "pinned": false
+        },
+        {
+            "id": "630dd85369abef0071161899",
+            "name": "NewBoardName",
+            "closed": false,
+            "idOrganization": "630b80492a221e00e16d42a6",
+            "pinned": false
+        },
+        {
+            "id": "630b82b9bd2d3300eb5d2e0b",
+            "name": "Testing Board",
+            "closed": false,
+            "idOrganization": "630b80492a221e00e16d42a6",
+            "pinned": false
+        }
+    ]
+	
+------------------------------------------------------------------------------------
+  Write and execute your test cases on Trello's APIs using Postman.
+------------------------------------------------------------------------------------
+                              Create A Board
+							  
+API : HTTP method -> POST |https://api.trello.com/1/boards/?name={{Name}}&key={{Key}}&token={{Token}}							  
+							  
+Description : confirm its default value of closed is false
+Test Case: 1 
+Expected Result: false
+Actual Result: false
+Status: Pass
+
+Description : confirm its default value of permissionLevel = private
+Test Case: 2 
+Expected Result: private
+Actual Result: private
+Status: Pass
+
+Description : confirm its canBePublic is true
+Test Case: 3
+Expected Result: true
+Actual Result: true
+Status: Pass
+
+Description : confirm its canInvite is true
+Test Case: 4
+Expected Result: true
+Actual Result: true
+Status: Pass		
+					  
+   
+------------------------------------------------------------------------------------
+                              Get Members
+							  
+API : HTTP method -> GET |https://api.trello.com/1/members/me?boards=open&key={{Key}}&token={{Token}}							  
+
+Description :  verify that number of boards in the response is above 1
+Test Case 1 : number of boards is above 1
+Expected Result: 200 ok
+Actual Result: 200 0k
+Status: Pass 
+
+/*
+  Get FirstID 
+*/
+
+pm.globals.set("FirstBoardID", jsonData.boards[0].id);
+pm.globals.get("FirstBoardID");
+
+/*
+  Get LastID board
+*/
+pm.globals.set("LastBoardID", jsonData.boards[jsonData.boards.length-1].id);
+pm.globals.get("LastBoardID");
+------------------------------------------------------------------------------------
+                             Delete A Board
+
+API : HTTP method -> DELETE | https://api.trello.com/1/boards/:id?key={{Key}}&token={{Token}}							  
+
+Description :  The status code is 200.
+Test Case 1 : response should be 200 OK
+Expected Result: 200 ok
+Actual Result: 200 0k
+Status: Pass
+
+Description :  Response Body should contain a meaningful message like "board is removed successfully".
+Test Case 1 : Response Body  contain a "board is removed successfully".
+Expected Result: true
+Actual Result: true
+Status: Pass 	
+------------------------------------------------------------------------------------
+						 
+							 

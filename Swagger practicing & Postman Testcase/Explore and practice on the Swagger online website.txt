@@ -1,0 +1,137 @@
+// create by : Ahmed Hesham Heikal
+
+
+------------------------------------------------------------------------------------
+  Explore and practice on the Swagger online website (Authors).
+------------------------------------------------------------------------------------
+
+First Request : Get All Authors
+
+API: http method -> GET |http://fakerestapi.azurewebsites.net/api/v1/Authors
+
+ Description : Responce for successful HTTP request
+ Test Case 1: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ Description : check Objects inside response contain, id, idBook, firstName, lastName
+ Test Case 2: check objects inside response Body
+ Expected Result: {"id","idBook","firstName","lastName"}
+ Actual Result: {"id","idBook","firstName","lastName"}
+ Status: Pass
+ 
+ Description : validate response Size using chai assertion library
+ Test Case 3: response size should be withn 40000 KB and 50000 KB
+ Expected Result: withn 40000 KB and 50000 KB
+ Actual Result: 46881 KB
+ Status: pass
+ 
+ Description : check response Headers contain "content-type"
+ Test Case 4: check response headers
+ Expected Result: TRUE
+ Actual Result: TRUE
+ Status: Pass
+ 
+ Description : check response Headers "content-type" contain json data
+ Test Case 5: check response headers contain json data
+ Expected Result: "application/json; charset=utf-8; v=1.0"
+ Actual Result: "json"
+ Status: Pass
+ 
+ --------------------------------------------------------------------------------------------
+ Second Request : create new Author
+ 
+ API: http method -> POST |http://fakerestapi.azurewebsites.net/api/v1/Authors
+ 
+ Description : Register a new valid Author successfully and response code 200 OK. debends on server of swagger
+ Test Case 1: response code 200 ok
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ Description : firstname & lastname should be mandatory at response body
+ Test Case 2: response code 200 ok
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ Description : firstname is missed in the request body (same for lastname)
+ Test Case 2: response code 400 Bad Request
+ Expected Result: 400 Bad Request
+ Actual Result: 400 Bad Request
+ Status: Pass
+ ----------------------------------------------------------------------------------------------
+ Third Request : Get the unvalied Author 
+ 
+ API: http method -> GET |http://fakerestapi.azurewebsites.net/api/v1/Authors
+  
+ Description : Get unvalied author
+ Test Case 1: response 404 Not Found
+ Expected Result: 404 Not Found
+ Actual Result: 404 Not Found
+ Status: Pass 
+ ----------------------------------------------------------------------------------------------
+ Fourth Request : Get Author idBook
+ 
+ API: http method -> GET |http://fakerestapi.azurewebsites.net/api/v1/Authors/authors/books/{{idBook}}
+  
+ Description : response body should contain idBook = 1 (same for idBook 2,3), and
+              Use for loop while testing id in this request to make sure 
+			  that all response objects contains the correct idBook.
+ Test Case 1: Searching with valid idBook
+ Expected Result: 200 ok
+ Actual Result: 200 ok
+ Status: Pass 
+ ----------------------------------------------------------------------------------------------
+  Fifth Request : Update Author (firstname, lastname)
+  
+ //BaseURL :http://fakerestapi.azurewebsites.net
+ 
+ API: http method -> PUT |{{BaseURL}}/api/v1/Authors/{{id}} 
+  
+ Description : Update (firstname, lastname) and 
+               
+			   
+ Test Case 1: Responce for successful HTTP request
+ Expected Result: 200 ok
+ Actual Result: 200 ok
+ Status: Pass 
+ 
+Description : confirm that Author's data in response is updated successfully.
+ Test case 2: to confirm that Author's data in response is updated successfully*/
+ Expected Result: new (firstname, lastname)
+ Actual Result: new(firstname, lastname)
+ Status: Pass
+ 
+ ----------------------------------------------------------------------------------------------
+ six Request : The author's data is changed in GET request
+ 
+ //BaseURL :http://fakerestapi.azurewebsites.net
+ 
+ API: http method -> GET |{{BaseURL}}/api/v1/Authors/{{id}}
+  
+ Description : to validate response status and code
+ Test case 1: Responce for successful HTTP request 200 ok
+ Expected Result: 200 ok
+ Actual Result: 200 ok
+ Status: Pass 
+ 
+ Description : The purpose of this test case is to make sure that if a change occurred from one endpoint (PUT request), 
+              it will affect other endpoints as well (GET request)
+			  this is a kind of integration testing.
+ Test case 1: Responce for successful HTTP request 200 ok
+ Expected Result: new (firstname, lastname)
+ Actual Result: OLD (firstname, lastname)
+ Status: Fail
+ ----------------------------------------------------------------------------------------------
+ seven Request : Get Author idBook
+ 
+ API: http method -> DELETE |http://fakerestapi.azurewebsites.net/api/v1/Authors/1
+  
+ Description : Delete Author 
+ Test Case 1: to validate response status and code
+ Expected Result: 200 ok
+ Actual Result: 200 ok
+ Status: Pass 
+ 
